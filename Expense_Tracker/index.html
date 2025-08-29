@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXRN6L7jZF+EjujzDHl0gNVnPKIy3Kh2V4hkTwrdk6ebGmBr3yYmSITyGFYtpB+1AnNKeP9Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Expense Tracker</h1>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="dashboard">
+                <div class="summary">
+                    <div class="card income">
+                        <h3>Total Income</h3>
+                        <p id="total-income">0.00Rs</p>
+                    </div>
+                    <div class="card expenses">
+                        <h3>Total Expenses</h3>
+                        <p id="total-expenses">0.00Rs</p>
+                    </div>
+                    <div class="card balance">
+                        <h3>Balance</h3>
+                        <p id="balance">0.00Rs</p>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h2>Financial Overview</h2>
+                    <canvas id="finance-chart"></canvas>
+                </div>
+            </section>
+            <section class="add-entry">
+                <h2>Add New Entry</h2>
+                <form id="entry-form">
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" name="type" required>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input type="text" id="category" name="category" placeholder="e.g., Salary, Groceries" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount (Rs)</label>
+                        <input type="number" id="amount" name="amount" min="0.01" step="0.01" placeholder="e.g., 500.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="3" placeholder="Optional"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Add Entry</button>
+                </form>
+            </section>
+
+
+            <section class="entries">
+                <h2>Financial Entries</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Category</th>
+                            <th>Amount (Rs)</th>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="entries-body">
+                        
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Edit Entry</h2>
+            <form id="edit-form">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label for="edit-type">Type</label>
+                    <select id="edit-type" name="edit-type" required>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-category">Category</label>
+                    <input type="text" id="edit-category" name="edit-category" placeholder="e.g., Salary, Groceries" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-amount">Amount (Rs)</label>
+                    <input type="number" id="edit-amount" name="edit-amount" min="0.01" step="0.01" placeholder="e.g., 500.00" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-date">Date</label>
+                    <input type="date" id="edit-date" name="edit-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-description">Description</label>
+                    <textarea id="edit-description" name="edit-description" rows="3" placeholder="Optional"></textarea>
+                </div>
+                <button type="submit" class="btn">Update Entry</button>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
